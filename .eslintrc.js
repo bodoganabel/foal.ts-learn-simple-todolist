@@ -28,7 +28,7 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
     '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/quotes': ['error', 'single'],
+    '@typescript-eslint/quotes': ['error', 'double'],
     'arrow-parens': ['error', 'as-needed'],
     'max-classes-per-file': 'off',
     'no-console': 'off',
@@ -37,7 +37,7 @@ module.exports = {
     'no-shadow': 'off',
     'comma-dangle': 'off',
     'sort-keys': 'off',
-    '@typescript-eslint/no-unused-vars': ['error', { 'args':  'none' }],
+    '@typescript-eslint/no-unused-vars': ['error', { 'args': 'none' }],
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/require-await': 'off',
     '@typescript-eslint/no-explicit-any': 'off'
