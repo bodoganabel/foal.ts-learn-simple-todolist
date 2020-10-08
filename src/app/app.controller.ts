@@ -1,14 +1,23 @@
-import { controller, Get, render } from '@foal/core';
+import { controller, Get, render, TokenRequired } from '@foal/core';
+import { TypeORMStore } from '@foal/typeorm';
 
 import { ApiController, AuthController } from './controllers';
 
 export class AppController {
   subControllers = [
     controller('/api', ApiController),
-    controller('/auth', AuthController)
+    controller('/auth', AuthController),
   ];
 
   @Get('/')
+  @TokenRequired({
+    // The session token is expected to be in a cookie.
+    cookie: true,
+    // Redirect the user to /signin if user is not logged in.
+    redirectTo: '/signin',
+    // Specify the "store" where the session was created.
+    store: TypeORMStore,
+  })
   index() {
     return render('templates/index.html');
   }
