@@ -33,7 +33,8 @@
     "node": ">=8"
   },
   "dependencies": {
-    "@foal/core": "^1.0.0",
+    "@foal/core": "^1.11.1",
+    "@foal/password": "^1.11.1",
     "@foal/typeorm": "^1.0.0",
     "source-map-support": "^0.5.1",
     "sqlite3": "^4.0.0",
