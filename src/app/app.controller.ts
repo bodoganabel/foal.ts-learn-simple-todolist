@@ -1,12 +1,14 @@
 import { controller, Get, render, TokenRequired } from '@foal/core';
 import { TypeORMStore } from '@foal/typeorm';
 
-import { ApiController, AuthController } from './controllers';
+import { ApiController, AuthController, SignupController } from './controllers';
 
 export class AppController {
   subControllers = [
     controller('/api', ApiController),
     controller('/auth', AuthController),
+    controller('/signup', SignupController),
+    controller('/signup', SignupController)
   ];
 
   @Get('/')

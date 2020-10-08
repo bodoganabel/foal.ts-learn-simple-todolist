@@ -25,8 +25,8 @@ import { Todo, User } from '../entities';
 })
 export class ApiController {
   @Get('/todos')
-  async getTodos() {
-    const todos = await getRepository(Todo).find();
+  async getTodos(ctx: Context) {
+    const todos = await getRepository(Todo).find({ owner: ctx.user });
     return new HttpResponseOK(todos);
   }
 
@@ -48,6 +48,8 @@ export class ApiController {
     // Create a new todo with the body of the HTTP request.
     const todo = new Todo();
     todo.text = ctx.request.body.text;
+    // Make the current user the owner of the todo.
+    todo.owner = ctx.user;
 
     // Save the todo in the database.
     await getRepository(Todo).save(todo);
@@ -63,6 +65,8 @@ export class ApiController {
     // Get the todo with the id given in the URL if it exists.
     const todo = await getRepository(Todo).findOne({
       id: +ctx.request.params.id,
+      // Do not return the todo if it does not belong to the current user.
+      owner: ctx.user,
     });
 
     // Return a 404 Not Found response if no such todo exists.
