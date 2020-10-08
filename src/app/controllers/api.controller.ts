@@ -17,6 +17,12 @@ import { getRepository } from 'typeorm';
 
 import { Todo, User } from '../entities';
 
+@TokenRequired({
+  cookie: true,
+  store: TypeORMStore,
+  // Make ctx.user be an instance of User.
+  user: fetchUser(User),
+})
 export class ApiController {
   @Get('/todos')
   async getTodos() {
