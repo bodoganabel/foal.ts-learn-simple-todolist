@@ -6,7 +6,9 @@ export const schema = {
   properties: {
     /* To complete */
   },
-  required: [ /* To complete */ ],
+  required: [
+    /* To complete */
+  ],
   type: 'object',
 };
 
@@ -15,7 +17,7 @@ export async function main(args: any) {
 
   try {
     // Do something.
-
+    console.log(args);
   } catch (error) {
     console.error(error);
   } finally {

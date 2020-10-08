@@ -5,6 +5,7 @@ module.exports = {
     'node': true
   },
   extends: [
+    "plugin:prettier/recommended",
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
@@ -17,9 +18,11 @@ module.exports = {
     sourceType: 'module'
   },
   plugins: [
-    '@typescript-eslint'
+    '@typescript-eslint',
+    "prettier"
   ],
   rules: {
+    "prettier/prettier": "error",
     '@typescript-eslint/array-type': 'error',
     '@typescript-eslint/explicit-member-accessibility': [
       'error', { 'accessibility': 'no-public' }

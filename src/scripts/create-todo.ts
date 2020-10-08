@@ -1,30 +1,37 @@
 // 3p
-import { createConnection } from "typeorm";
+import { createConnection } from 'typeorm';
 
 // App
-import { Todo } from "../app/entities";
+import { Todo, User } from '../app/entities';
 
 export const schema = {
-  additionalProperties: false,
   properties: {
-    text: { type: "string" },
+    owner: { type: 'string', format: 'email' },
+    text: { type: 'string' },
   },
-  required: ["text"],
-  type: "object",
+  required: ['owner', 'text'],
+  type: 'object',
 };
 
-export async function main(args: { text: string }) {
+export async function main(args: { owner: string; text: string }) {
   const connection = await createConnection();
-
   try {
-    // Create a new task with the text given in the command line.
+    const user = await connection
+      .getRepository(User)
+      .findOne({ email: args.owner });
+
+    if (!user) {
+      console.log('No user was found with the email ' + args.owner);
+      return;
+    }
+
     const todo = new Todo();
     todo.text = args.text;
+    todo.owner = user;
 
-    // Save the task in the database and then display it in the console.
     console.log(await connection.manager.save(todo));
   } catch (error) {
-    console.error(error);
+    console.log(error.message);
   } finally {
     await connection.close();
   }
